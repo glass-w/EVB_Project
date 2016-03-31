@@ -14,7 +14,7 @@
 !              C3                               C3
 !              |                                |
 !             Asp                              Asp
-!      state 1 (aadh_reactant.psf)      state 2 (ttw_prod.rtf) !-- these are the psf files
+!      state 1 (aadh_reactant.psf)      state 2 (aadh_prod_od1.psf) !-- these are the psf files
 
 ! nensem : number of EVB states
 ensemble nensem 2
