@@ -1,0 +1,153 @@
+
+*AADH 2 state EVB
+*
+!
+!            Amine                             Amine
+!              |                                 |
+!              NH                                NH
+!              |
+!              H
+!                                             H
+!                                            /
+!           O(D1)  O(D2)                     O(D1)  O(D2)
+!           \     //                          \     //
+!            \   //                            \   //
+!              C3                               C3
+!              |                                |
+!             Asp                              Asp
+!      state 1 (aadh_reactant.psf)      state 2 (aadh_prod_od1.psf) !-- these are the psf files
+
+! nensem : number of EVB states
+ensemble nensem 2
+
+bomlev 0
+prnlev 5
+wrnlev 2
+
+if ?ensemble .ne. 1 then
+ echo "Test NOT performed."
+ stop
+endif
+
+set node ?whoiam
+set setupdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB
+set setupdirOD1 /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/charmm_evb_calcs/OD1
+set outputdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/OD1_outputs
+
+if @node .EQ. 0 set top state1
+if @node .EQ. 1 set top state2
+
+!
+! READ IN TOPOLOGIES
+!
+ensemble open read unit 11 card name @setupdir/top_ttw@node.inp
+read rtf card unit 11
+ensemble close unit 11
+
+!
+! READ IN PARAMETERS
+!
+
+ensemble open read form unit 1 name @setupdir/par_ttw.inp
+read parameter card unit 1
+ensemble close unit 1
+
+!
+! READ IN PSF & COOR
+!
+if @node .eq. 0 then
+read psf card name @setupdirOD1/aadh_reactant.psf
+endif
+if @node .eq. 1 then
+read psf card name @setupdirOD1/aadh_prod_od1_rename.psf
+endif
+
+read coor card name @setupdirOD1/path1_b3lyp_geom3.crd
+print coor card name @setupdirOD1/path1_b3lyp_geom3.crd
+
+! CALCULATE DIPOLE
+!
+!  This is needed to allow the calculation of state averaged dipole moments.
+!  Useful in debugging/analysis. As there is only one molecule then we can use
+!  'sele all end'
+!
+! coor dipo sele all end
+
+!
+! CALCULATE NON-EVB ENERGY
+!
+!  This is here for comparison with EVB energy calculation
+!
+energy
+
+!
+! SET UP EVB CALCULATION
+!
+!  Coupling parameters for 2-D Gaussian + a constant coupling
+!
+!  coupling of zero will give a EVB matrix with the energies of the states as the
+!  eigenvalues.
+
+   set CONS 0.0
+
+!
+! INITIALISE EVB CALCULATION
+!
+!  EVB hamiltonian matrix, H = :
+!
+!  state 1: |[0,0] [0,1]|
+!  state 2: |[1,0] [1,1]|
+!
+!  Only modify upper triangular part as lower triangular part is filled in
+!  automatically.
+!
+!   V0 and V1 and the potential energies of state 1 and 2 respectively.
+!
+!   EVBS : save unit for dipole output
+!   SHFT 0 <VALUE>                      : H[0,0] <- V0 + <VALUE>
+!   COUP 0 1 CONS <VALUE>               : H[0,1] <- H[0,1] + <VALUE>
+!   COUP 0 1 GAUS TWOD <2D GAUSSIAN>    : H[0,1] <- H[0,1] + <2D GAUSSIAN>
+
+ensemble evb
+        COUP 0 1 CONS @CONS
+envbi
+
+energy
+
+!
+! RUN RELAXED SCAN
+!
+!ensemble open write card unit 21 name @outputdir/reaction.energy.@node
+
+!set atom1 BCHN 1 OD1
+!set atom2 BCHN 1 HD1   ! think that this refers to the Asp residue in the BCHN
+!set atom3 BCHN 1 OD2
+
+!set inc 0.1
+!set v -1.0
+!set n 1
+
+!label loop
+!       skip none
+
+!       resd reset kval 2000.0 rval @v -
+!       1.0 @atom1 @atom2 -1.0 @atom2 @atom3
+
+!       mini abnr nstep 200 nprint 100
+
+!       skip resd
+!       energy
+!       write title unit 21
+!       * @v ?ener
+!       *
+
+!incr v by @inc
+!incr n by 1
+!if n .le. 21 goto loop
+
+!ensemble close unit 21
+
+stop
+
+~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+~        
