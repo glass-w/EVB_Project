@@ -1,0 +1,424 @@
+ **** Warning ****  The following extraneous characters
+ were found while command processing in CHARMM
+ 2
+
+ CHARMM>
+
+ CHARMM>    bomlev 0
+
+ CHARMM>    prnlev 5
+
+ CHARMM>    wrnlev 2
+
+ CHARMM>
+
+ CHARMM>    if ?ensemble .ne. 1 then
+ RDCMND substituted energy or value "?ENSEMBLE" to "1"
+ Comparing "1" and "1".
+ IF test evaluated as false.  Skip to ELSE or ENDIF
+
+ CHARMM>
+
+ CHARMM>    set node ?whoiam
+ RDCMND substituted energy or value "?WHOIAM" to "1"
+ Parameter: NODE <- "1"
+
+ CHARMM>    set setupdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB
+ Parameter: SETUPDIR <- "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB"
+
+ CHARMM>    set setupdirOD1 /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/charmm_evb_calcs/OD1
+ Parameter: SETUPDIROD1 <- "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1"
+
+ CHARMM>    set outputdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/OD1_outputs
+ Parameter: OUTPUTDIR <- "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/OD1_OUTPUTS"
+
+ CHARMM>
+
+ CHARMM>    if @node .EQ. 0 set top state1
+ Parameter: NODE -> "1"
+ Comparing "1" and "0".
+ IF test evaluated as false.  Skipping command
+
+ CHARMM>    if @node .EQ. 1 set top state2
+ Parameter: NODE -> "1"
+ Comparing "1" and "1".
+ IF test evaluated as true.  Performing command
+ Parameter: TOP <- "STATE2"
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! READ IN TOPOLOGIES
+ CHARMM>    !
+ CHARMM>    ensemble open read unit 11 card name @setupdir/top_ttw@node.inp
+ Parameter: SETUPDIR -> "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB"
+ Parameter: NODE -> "1"
+
+ CHARMM>    read rtf card unit 11
+ MAINIO> Residue topology file being read from unit  11.
+ TITLE> *>>>>>>>>CHARMM22 ALL-HYDROGEN TOPOLOGY FILE FOR PROTEINS <<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>> AUGUST 1999 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> *>>>>>>> DIRECT COMMENTS TO ALEXANDER D. MACKERELL JR. <<<<<<<<<
+ TITLE> *>>>>>> 410-706-7442 OR EMAIL: ALEX,MMIRIS.AB.UMD.EDU  <<<<<<<<<
+ TITLE> *
+
+ CHARMM>    ensemble close unit 11
+   UNIT 11
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! READ IN PARAMETERS
+ CHARMM>    !
+ CHARMM>
+
+ CHARMM>    ensemble open read form unit 1 name @setupdir/par_ttw.inp
+ Parameter: SETUPDIR -> "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB"
+
+ CHARMM>    read parameter card unit 1
+
+          PARAMETER FILE BEING READ FROM UNIT  1
+ TITLE> *>>>> CHARMM22 ALL-HYDROGEN PARAMETER FILE FOR PROTEINS <<<<<<<<<<
+ TITLE> *>>>>>>>>>>>>>>>>>>>>>> AUGUST 1999 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ TITLE> *>>>>>>> DIRECT COMMENTS TO ALEXANDER D. MACKERELL JR. <<<<<<<<<
+ TITLE> *>>>>>> 410-706-7442 OR EMAIL: ALEX,MMIRIS.AB.UMD.EDU  <<<<<<<<<
+ TITLE> *
+ PARMIO> NONBOND, HBOND lists and IMAGE atoms cleared.
+
+ CHARMM>    ensemble close unit 1
+   UNIT 1
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! READ IN PSF & COOR
+ CHARMM>    !
+ CHARMM>    if @node .eq. 0 then
+ Parameter: NODE -> "1"
+ Comparing "1" and "0".
+ IF test evaluated as false.  Skip to ELSE or ENDIF
+
+ CHARMM>    if @node .eq. 1 then
+ Parameter: NODE -> "1"
+ Comparing "1" and "1".
+ IF test evaluated as true.  Performing command
+
+ CHARMM>    read psf card name @setupdirOD1/aadh_prod_od1_rename.psf
+ Parameter: SETUPDIROD1 -> "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1"
+ VOPEN> Attempting to open::/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1/AADH_PROD_OD1_RENAME.PSF::
+ MAINIO> Protein structure file being read from unit  90.
+ TITLE>  *  QM/MM DYNAMICS WITH UMBRELLA SAMPLING
+ TITLE>  *  AADH: TRYPTAMINE NEW CRYSTAL STRUCTURE
+ TITLE>  *  28/10/03
+ TITLE>  *  DATE:     4/ 1/16     12: 4:24      CREATED BY USER: kr8728
+ TITLE>  *
+ PSFSUM> PSF modified: NONBOND lists and IMAGE atoms cleared.
+ PSFSUM> Summary of the structure file counters :
+         Number of segments      =        4   Number of residues   =     1639
+         Number of atoms         =     8179   Number of groups     =     2608
+         Number of bonds         =     8238   Number of angles     =     8751
+         Number of dihedrals     =    10799   Number of impropers  =      696
+         Number of cross-terms   =        0
+         Number of HB acceptors  =     1772   Number of HB donors  =     3173
+         Number of NB exclusions =        0   Total charge =   -6.00000
+ VCLOSE: Closing unit   90 with status "KEEP"
+
+ CHARMM>    endif
+
+ CHARMM>
+
+ CHARMM>    read coor card name @setupdirOD1/path1_b3lyp_geom3.crd
+ Parameter: SETUPDIROD1 -> "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1"
+ VOPEN> Attempting to open::/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1/PATH1_B3LYP_GEOM3.CRD::
+          SPATIAL COORDINATES BEING READ FROM UNIT 90
+ TITLE> *  QM/MM DYNAMICS WITH UMBRELLA SAMPLING
+ TITLE> *  AADH: TRYPTAMINE NEW CRYSTAL STRUCTURE
+ TITLE> *  28/10/03
+ TITLE> *  DATE:     3/ 4/14     20:20:18      CREATED BY USER: KR8728
+ TITLE> *
+
+ ** WARNING ** For atom in coordinate file, the corresponding residue in the PSF lacks that atom:
+ INDEX= 3030 IRES=  205 RESID=39   RES=TTW  ATOM=HI2
+ ** WARNING ** After reading, there are no coordinates for selected atom:  3331   224 ASP  HI2
+
+ ** A total of     1 selected atoms have no coordinates
+ *** LEVEL  2 WARNING *** BOMLEV IS    0
+ VCLOSE: Closing unit   90 with status "KEEP"
+
+ CHARMM>    print coor card name @setupdirOD1/path1_b3lyp_geom3.crd
+ Parameter: SETUPDIROD1 -> "/USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CALCS/OD1"
+
+          COORDINATE FILE MODULE
+ TITLE>  *
+
+....
+
+3321  224 ASP  N      4.81900  -3.85800  -2.38000 BCHN 58     0.00000
+ 3322  224 ASP  HN     4.07800  -4.40100  -2.76600 BCHN 58     0.00000
+ 3323  224 ASP  CA     4.95100  -3.91200  -0.94600 BCHN 58     0.00000
+ 3324  224 ASP  HA     5.26000  -2.94200  -0.58100 BCHN 58     0.00000
+ 3325  224 ASP  CB     3.63900  -4.33600  -0.22700 BCHN 58     0.00000
+ 3326  224 ASP  HB1    3.29600  -5.30200  -0.61000 BCHN 58     0.00000
+ 3327  224 ASP  HB2    3.89200  -4.46800   0.83300 BCHN 58     0.00000
+ 3328  224 ASP  CG     2.49900  -3.29900  -0.29100 BCHN 58     0.00000
+ 3329  224 ASP  OD1    2.84200  -2.07700  -0.23000 BCHN 58     0.00000
+ 3330  224 ASP  OD2    1.32700  -3.75300  -0.32000 BCHN 58     0.00000
+ 3331  224 ASP  HI2 9999.000009999.000009999.00000 BCHN 58     0.00000
+ 3332  224 ASP  C      6.00200  -4.92800  -0.58700 BCHN 58     0.00000
+ 3333  224 ASP  O      6.08900  -5.99300  -1.19300 BCHN 58     0.00000
+ 
+ ....
+ 
+ **** Warning ****  The following extraneous characters
+  were found while command processing in CHARMM
+ NAME /USERS/WILLIAMGLASS/DOCUMENTS/TMCS/BRISTOL/PROJECT/AADH_EVB/CHARMM_EVB_CAL
+ CS/OD1/PATH1_B3LYP_GEOM3.CRD
+
+ CHARMM>
+
+ CHARMM>    ! CALCULATE DIPOLE
+ CHARMM>    !
+ CHARMM>    !  This is needed to allow the calculation of state averaged dipole moments.
+ CHARMM>    !  Useful in debugging/analysis. As there is only one molecule then we can use
+ CHARMM>    !  'sele all end'
+ CHARMM>    !
+ CHARMM>    ! coor dipo sele all end
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! CALCULATE NON-EVB ENERGY
+ CHARMM>    !
+ CHARMM>    !  This is here for comparison with EVB energy calculation
+ CHARMM>    !
+ CHARMM>    energy
+
+ NONBOND OPTION FLAGS:
+     ELEC     VDW      ATOMs    CDIElec  SHIFt    VATOm    VSWItch
+     BYGRoup  NOEXtnd  NOEWald
+ CUTNB  = 14.000 CTEXNB =999.000 CTONNB = 10.000 CTOFNB = 12.000
+ CGONNB =  0.000 CGOFNB = 10.000
+ WMIN   =  1.500 WRNMXD =  0.500 E14FAC =  1.000 EPS    =  1.000
+ NBXMOD =      5
+ There are        0 atom  pairs and        0 atom  exclusions.
+ There are        0 group pairs and        0 group exclusions.
+ <MAKINB> with mode   5 found  15633 exclusions and  10573 interactions(1-4)
+ <MAKGRP> found   3570 group exclusions.
+ Generating nonbond list with Exclusion mode = 5
+ == PRIMARY == SPACE FOR  2350249 ATOM PAIRS AND        0 GROUP PAIRS
+ NBONDA>>  Maximum group spatial extent (12A) exceeded.
+   Size is    10004.30 Angstroms and starts with atom:    3325
+   Please check group boundary definitions.
+ == PRIMARY == SPACE FOR  3525393 ATOM PAIRS AND        0 GROUP PAIRS
+ NBONDA>>  Maximum group spatial extent (12A) exceeded.
+   Size is    10004.30 Angstroms and starts with atom:    3325
+   Please check group boundary definitions.
+ == PRIMARY == SPACE FOR  5288109 ATOM PAIRS AND        0 GROUP PAIRS
+ NBONDA>>  Maximum group spatial extent (12A) exceeded.
+   Size is    10004.30 Angstroms and starts with atom:    3325
+   Please check group boundary definitions.
+
+ General atom nonbond list generation found:
+  3617241 ATOM PAIRS WERE FOUND FOR ATOM LIST
+   206708 GROUP PAIRS REQUIRED ATOM SEARCHES
+
+ENER ENR:  Eval#     ENERgy      Delta-E         GRMS
+ENER INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+ENER EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+ ----------       ---------    ---------    ---------    ---------    ---------
+ENER>        0  0.16344E+12  0.00000E+00  0.17042E+06
+ENER INTERN>    0.16344E+12  0.21416E+04  0.15674E+03  0.13786E+04  0.81477E+02
+ENER EXTERN>      632.68694 -24225.10239      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! SET UP EVB CALCULATION
+ CHARMM>    !
+ CHARMM>    !  Coupling parameters for 2-D Gaussian + a constant coupling
+ CHARMM>    !
+ CHARMM>    !  coupling of zero will give a EVB matrix with the energies of the states as the
+ CHARMM>    !  eigenvalues.
+ CHARMM>
+
+ CHARMM>       set CONS 0.0
+ Parameter: CONS <- "0.0"
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! INITIALISE EVB CALCULATION
+ CHARMM>    !
+ CHARMM>    !  EVB hamiltonian matrix, H = :
+ CHARMM>    !
+ CHARMM>    !  state 1: |[0,0] [0,1]|
+ CHARMM>    !  state 2: |[1,0] [1,1]|
+ CHARMM>    !
+ CHARMM>    !  Only modify upper triangular part as lower triangular part is filled in
+ CHARMM>    !  automatically.
+ CHARMM>    !
+ CHARMM>    !   V0 and V1 and the potential energies of state 1 and 2 respectively.
+ CHARMM>    !
+ CHARMM>    !   EVBS : save unit for dipole output
+ CHARMM>    !   SHFT 0 <VALUE>                  : H[0,0] <- V0 + <VALUE>
+ CHARMM>    !   COUP 0 1 CONS <VALUE>           : H[0,1] <- H[0,1] + <VALUE>
+ CHARMM>    !   COUP 0 1 GAUS TWOD <2D GAUSSIAN>        : H[0,1] <- H[0,1] + <2D GAUSSIAN>
+ CHARMM>
+
+ CHARMM>    ensemble evb
+ Using Multi-Reference MM (EVB).
+ Ensemble EVB setting all   1 elements of the coupling matrix to a default value of zero.
+ Ensemble EVB setting all energy shifts to the default value of zero.
+ Energy will be the lowest eigenvalue of a   2 by   2 coupling matrix.
+
+    EVB>        COUP 0 1 CONS @CONS
+ Parameter: CONS -> "0.0"
+
+ Reading terms for inclusion in EVB coupling element   0 -  1 ...
+ Specified term is a constant with value:      0.00000
+
+    EVB>    envbi
+ENVB...end of EVB input block
+
+ ---------------------------------------------
+ Energy shift summary:
+ Node =   0 Shift =      0.00000
+ Node =   1 Shift =      0.00000
+ ---------------------------------------------
+
+
+ ---------------------------------------------
+ Coupling matrix element summary:
+
+ > Element which couples nodes   0 &   1 is a sum of the following terms:
+ >> Constant   :      0.00000
+ ---------------------------------------------
+
+
+ CHARMM>
+
+ CHARMM>    energy
+
+ NONBOND OPTION FLAGS:
+     ELEC     VDW      ATOMs    CDIElec  SHIFt    VATOm    VSWItch
+     BYGRoup  NOEXtnd  NOEWald
+ CUTNB  = 14.000 CTEXNB =999.000 CTONNB = 10.000 CTOFNB = 12.000
+ CGONNB =  0.000 CGOFNB = 10.000
+ WMIN   =  1.500 WRNMXD =  0.500 E14FAC =  1.000 EPS    =  1.000
+ NBXMOD =      5
+ There are  3617241 atom  pairs and    26206 atom  exclusions.
+ There are        0 group pairs and     3570 group exclusions.
+ Generating nonbond list with Exclusion mode = 5
+ == PRIMARY == SPACE FOR  5288109 ATOM PAIRS AND        0 GROUP PAIRS
+ NBONDA>>  Maximum group spatial extent (12A) exceeded.
+   Size is    10004.30 Angstroms and starts with atom:    3325
+   Please check group boundary definitions.
+
+ General atom nonbond list generation found:
+  3617241 ATOM PAIRS WERE FOUND FOR ATOM LIST
+   206708 GROUP PAIRS REQUIRED ATOM SEARCHES
+
+ENER ENR:  Eval#     ENERgy      Delta-E         GRMS
+ENER INTERN:          BONDs       ANGLes       UREY-b    DIHEdrals    IMPRopers
+ENER EXTERN:        VDWaals         ELEC       HBONds          ASP         USER
+ ----------       ---------    ---------    ---------    ---------    ---------
+ENER>        0 -0.17717E+05  0.16344E+12  0.16053E+02
+ENER INTERN>    0.16344E+12  0.21416E+04  0.15674E+03  0.13786E+04  0.81477E+02
+ENER EXTERN>      632.68694 -24225.10239      0.00000      0.00000      0.00000
+ ----------       ---------    ---------    ---------    ---------    ---------
+
+ CHARMM>
+
+ CHARMM>    !
+ CHARMM>    ! RUN RELAXED SCAN
+ CHARMM>    !
+ CHARMM>    !ensemble open write card unit 21 name @outputdir/reaction.energy.@node
+ CHARMM>
+
+ CHARMM>    !set atom1 BCHN 1 OD1
+ CHARMM>    !set atom2 BCHN 1 HD1   ! think that this refers to the Asp residue in the BCHN
+ CHARMM>    !set atom3 BCHN 1 OD2
+ CHARMM>
+
+ CHARMM>    !set inc 0.1
+ CHARMM>    !set v -1.0
+ CHARMM>    !set n 1
+ CHARMM>
+
+ CHARMM>    !label loop
+ CHARMM>    !   skip none
+ CHARMM>
+
+ CHARMM>    !   resd reset kval 2000.0 rval @v -
+ CHARMM>    !   1.0 @atom1 @atom2 -1.0 @atom2 @atom3
+ CHARMM>
+
+ CHARMM>    !   mini abnr nstep 200 nprint 100
+ CHARMM>
+
+ CHARMM>    !   skip resd
+ CHARMM>    !   energy
+ CHARMM>    !   write title unit 21
+ CHARMM>    !   * @v ?ener
+ CHARMM>    !   *
+ CHARMM>
+
+ CHARMM>    !incr v by @inc
+ CHARMM>    !incr n by 1
+ CHARMM>    !if n .le. 21 goto loop
+ CHARMM>
+
+ CHARMM>    !ensemble close unit 21
+ CHARMM>
+
+ CHARMM>    stop
+
+      $$$$$$  New timer profile Local node$$$$$
+
+   List time                       0.48 Other:            0.00
+         Electrostatic & VDW             0.20 Other:            0.00
+      Nonbond force                   0.20 Other:            0.00
+         Bond energy                     0.00 Other:            0.00
+         Angle energy                    0.00 Other:            0.00
+         Dihedral energy                 0.00 Other:            0.00
+         Restraints energy               0.00 Other:            0.00
+      INTRNL energy                   0.01 Other:            0.00
+      Comm energy                     0.00 Other:            0.00
+      Comm force                      0.00 Other:            0.00
+         EVB MPI Comms                   0.01 Other:            0.00
+         EVB Energy                      0.00 Other:            0.00
+         EVB Forces                      0.00 Other:            0.00
+      EVB routine                     0.01 Other:            0.00
+   Energy time                     0.21 Other:            0.00
+ Total time                      1.20 Other:            0.51
+
+         $$$$$$  Average   profile $$$$$
+
+   List time                       0.48 Other:            0.00
+         Electrostatic & VDW             0.20 Other:            0.00
+      Nonbond force                   0.20 Other:            0.00
+         Bond energy                     0.00 Other:            0.00
+         Angle energy                    0.00 Other:            0.00
+         Dihedral energy                 0.00 Other:            0.00
+         Restraints energy               0.00 Other:            0.00
+      INTRNL energy                   0.01 Other:            0.00
+      Comm energy                     0.00 Other:            0.00
+      Comm force                      0.00 Other:            0.00
+         EVB MPI Comms                   0.01 Other:            0.00
+         EVB Energy                      0.00 Other:            0.00
+         EVB Forces                      0.00 Other:            0.00
+      EVB routine                     0.01 Other:            0.00
+   Energy time                     0.21 Other:            0.00
+ Total time                      1.20 Other:            0.51
+
+                    NORMAL TERMINATION BY NORMAL STOP
+                    MOST SEVERE WARNING WAS AT LEVEL  2
+
+                    $$$$$ JOB ACCOUNTING INFORMATION $$$$$
+                     ELAPSED TIME:     1.21  SECONDS
+                         CPU TIME:     0.83  SECONDS
+~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+~                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+
