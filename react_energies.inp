@@ -1,0 +1,62 @@
+*AADH 2 state EVB
+*
+!
+!            Amine                             Amine
+!              |                                 |
+!              NH                                NH
+!              |
+!              H
+!                                             H
+!                                            /
+!           O(D1)  O(D2)                     O(D1)  O(D2)
+!           \     //                          \     //
+!            \   //                            \   //
+!              C3                               C3
+!              |                                |
+!             Asp                              Asp
+!      state 1 (aadh_reactant.psf)      state 2 (aadh_prod_od1.psf) !-- these are the psf files
+
+
+bomlev 0
+prnlev 5
+wrnlev 2
+
+!set setupdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB
+!set setupdirOD1 /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/charmm_evb_calcs/OD1
+!set outputdir /Users/williamglass/Documents/TMCS/Bristol/Project/AADH_EVB/OD1_outputs
+
+set setupdir /Users/robert_arbon/Code/AADH_EVB
+set setupdirOD1 @setupdir/OD1
+set outputdir @setupdir/OD1_outputs
+
+!
+! READ IN TOPOLOGIES
+!
+open read unit 11 card name @setupdir/top_ttw.inp
+read rtf card unit 11
+close unit 11
+
+!if @node .eq. 1 then
+! open read unit 11 card name @setupdir/ttw_prod.rtf
+! read rtf unit 11 card append
+! close unit 11
+!endif
+
+!
+! READ IN PARAMETERS
+!
+open read form unit 1 name @setupdir/par_ttw.inp
+read parameter card unit 1
+close unit 1
+
+!
+! READ IN PSF & COOR
+!
+read psf card name @setupdirOD1/aadh_reactant.psf
+
+read coor card name @setupdirOD1/path1_b3lyp_geom3.crd
+
+
+energy
+
+stop
